@@ -1,11 +1,12 @@
 import pandas as pd
 import numpy as np
+from scipy.stats import t
 
-
-chat_id = 123456 # Ваш chat ID, не меняйте название переменной
+chat_id = 516575251 # Ваш chat ID, не меняйте название переменной
 
 def solution(x: np.array) -> float:
-    # Измените код этой функции
-    # Это будет вашим решением
-    # Не меняйте название функции и её аргументы
-    return x.mean() # Ваш ответ
+    n = len(x)
+    mean = x.mean()
+    std_err = np.std(x, ddof = 1)/np.sqrt(n)
+    t_val = t.ppf(0.975, df = n - 1)
+    return (2 * mean)/(t_val * std_err)**2 # Ваш ответ.
